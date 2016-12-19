@@ -33,7 +33,7 @@ public class ProductData
 	{
 		int status = 0;
 		MySqlHelper db = new MySqlHelper();
-		String query = "{CALL SP_ADD_PRODUCT(?,?,?,?,?,?,?,?,?,?)}";
+		String query = "{CALL SP_ADD_PRODUCT(?,?,?,?,?,?,?,?,?)}";
 		CallableStatement stmt = (CallableStatement) db.connect().prepareCall(query);
 		stmt.setString(1, product.getCod_produto());
 		stmt.setString(2, product.getNombre());
@@ -41,14 +41,13 @@ public class ProductData
 		stmt.setInt(4, product.getEstado());
 		stmt.setString(5, product.getFecha_creacion());
 		stmt.setString(6, product.getUsu_creacion());
-		stmt.setInt(7, product.getAlmacen_id());
-		stmt.setInt(8, product.getUbicacion_id());
-		stmt.setString(9, product.getQr_cod());
-		stmt.registerOutParameter(10, Types.INTEGER);
+		stmt.setString(7, product.getQr_cod());
+		stmt.setDouble(8, product.getPrecio());
+		stmt.registerOutParameter(9, Types.INTEGER);
 		try
 		{
 			stmt.executeUpdate();
-			status =  stmt.getInt(10);
+			status =  stmt.getInt(9);
 		}catch(SQLException e) {
 		    e.printStackTrace();
 		}

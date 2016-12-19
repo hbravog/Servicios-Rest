@@ -38,9 +38,11 @@ public class SimpleRestService {
 	
 	@GET
 	@Path("/AddProduct")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response AddProduct(@QueryParam("p1") String cod,@QueryParam("p2") String item,@QueryParam("p3") int prov,@QueryParam("p4") int estado,@QueryParam("p5") String fecha_crea,@QueryParam("p6") String usuario, @QueryParam("p7") int almacen,@QueryParam("p8") int ubicacion,@QueryParam("p9") String qrcode) throws SQLException, ParseException 
+	@Produces(MediaType.TEXT_PLAIN)
+	public String AddProduct(@QueryParam("p1") String cod,@QueryParam("p2") String item,@QueryParam("p3") int prov,@QueryParam("p4") int estado,@QueryParam("p5") String fecha_crea,@QueryParam("p6") String usuario,@QueryParam("p7") String qrcode,@QueryParam("p8") String precio) throws SQLException, ParseException 
 	{
+		int response = 0;
+		
 		Product dto = new Product();
 		ProductData product = new ProductData();
 		dto.setCod_produto(cod);
@@ -49,11 +51,13 @@ public class SimpleRestService {
 		dto.setEstado(estado);
 		dto.setFecha_creacion(fecha_crea);
 		dto.setUsu_creacion(usuario);
-		dto.setAlmacen_id(almacen);
-		dto.setUbicacion_id(ubicacion);
 		dto.setQr_cod(qrcode);
+		dto.setPrecio(Double.parseDouble(precio));
 		
-		return Response.ok(product.CreateProduct(dto)).build();
+		//return Response.ok(product.CreateProduct(dto)).build();
+		//return product.CreateProduct(dto);
+		 response = product.CreateProduct(dto);
+		 return String.valueOf(response);
 	}
 }
 

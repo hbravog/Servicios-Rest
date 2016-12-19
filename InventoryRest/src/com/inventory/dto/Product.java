@@ -12,13 +12,13 @@ public class Product
 	private int almacen_id;
 	private int ubicacion_id;
 	private String qr_cod;	
-	
+	private double precio;
 	public Product()
 	{
 		
 	}
 	
-	public Product(String cod_produto, String nombre, String stock, int proveedor_id, int estado, String fecha_creacion, String usu_creacion, int almacen_id, int ubicacion_id, String qrCod, String qr_cod)
+	public Product(String cod_produto, String nombre, String stock, int proveedor_id, int estado, String fecha_creacion, String usu_creacion, int almacen_id, int ubicacion_id, String qrCod, String qr_cod,double precio)
 	{
 		 this.cod_produto = cod_produto;
 	     this.nombre = nombre;
@@ -30,6 +30,7 @@ public class Product
 	     this.almacen_id = almacen_id;
 	     this.ubicacion_id = ubicacion_id;
 	     this.qr_cod = qr_cod;
+	     this.precio = precio;
 		
 	}
 	
@@ -111,6 +112,16 @@ public class Product
 
     public void setQr_cod(String qr_cod) {
         this.qr_cod = qr_cod;
+    }
+    
+    public double getPrecio()
+    {
+    	return precio;
+    }
+    
+    public void setPrecio(double precio)
+    {
+    	this.precio = precio;
     }
 	
 	
