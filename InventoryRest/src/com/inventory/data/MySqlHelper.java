@@ -8,9 +8,9 @@ import java.util.Properties;
 public class MySqlHelper {
     // init database constants
     private static final String DATABASE_DRIVER = "com.mysql.jdbc.Driver";
-    private static final String DATABASE_URL = "jdbc:mysql://localhost:8889/InventoryControl";
+    private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/InventoryAndroid";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "root";
+    private static final String PASSWORD = "habg155850";
     private static final String MAX_POOL = "250";
 
     // init connection object

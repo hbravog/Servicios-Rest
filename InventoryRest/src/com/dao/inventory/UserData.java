@@ -24,9 +24,9 @@ public class UserData
         while (rs.next()) 
         {
 			 Usuario usuario = new Usuario();
-			 usuario.setRut(rs.getString(3).toString()); 
-			 usuario.setNombre(rs.getString(1).toString());
-			 usuario.setApellidos(rs.getString(2).toString());
+			 usuario.setRut(rs.getString(1).toString()); 
+			 usuario.setNombre(rs.getString(2).toString());
+			 usuario.setApellidos(rs.getString(3).toString());
 			 usuario.setClave(rs.getString(4).toString());
 			 lista.add(usuario);
         }

@@ -9,16 +9,19 @@ public class Product
 	private int estado;
 	private String fecha_creacion;
 	private String usu_creacion;
-	private int almacen_id;
-	private int ubicacion_id;
 	private String qr_cod;	
 	private double precio;
+	private int categoria_id;
+	private int qty;
+	private String location;
+	private String warehouse;
+	
 	public Product()
 	{
 		
 	}
 	
-	public Product(String cod_produto, String nombre, String stock, int proveedor_id, int estado, String fecha_creacion, String usu_creacion, int almacen_id, int ubicacion_id, String qrCod, String qr_cod,double precio)
+	public Product(String cod_produto, String nombre, String stock, int proveedor_id, int estado, String fecha_creacion, String usu_creacion, String qrCod, String qr_cod,double precio,int categoria_id,int qty,String location,String warehouse)
 	{
 		 this.cod_produto = cod_produto;
 	     this.nombre = nombre;
@@ -27,10 +30,12 @@ public class Product
 	     this.estado = estado;
 	     this.fecha_creacion = fecha_creacion;
 	     this.usu_creacion = usu_creacion;
-	     this.almacen_id = almacen_id;
-	     this.ubicacion_id = ubicacion_id;
 	     this.qr_cod = qr_cod;
 	     this.precio = precio;
+	     this.categoria_id = categoria_id;
+	     this.qty = qty;
+	     this.location = location;
+	     this.setWarehouse(warehouse);
 		
 	}
 	
@@ -89,23 +94,6 @@ public class Product
     public void setUsu_creacion(String usu_creacion) {
         this.usu_creacion = usu_creacion;
     }
-
-    public int getAlmacen_id() {
-        return almacen_id;
-    }
-
-    public void setAlmacen_id(int almacen_id) {
-        this.almacen_id = almacen_id;
-    }
-
-    public int getUbicacion_id() {
-        return ubicacion_id;
-    }
-
-    public void setUbicacion_id(int ubicacion_id) {
-        this.ubicacion_id = ubicacion_id;
-    }
-
     public String getQr_cod() {
         return qr_cod;
     }
@@ -123,6 +111,41 @@ public class Product
     {
     	this.precio = precio;
     }
+
+	public int getCategoria_id() {
+		return categoria_id;
+	}
+
+	public void setCategoria_id(int categoria_id) {
+		this.categoria_id = categoria_id;
+	}
+	
+	public int getQty(){
+		return qty;
+	}
+	
+	public void setQty(int qty){
+		this.qty = qty;
+	}
+	
+	public String getLocation()
+	{
+		return location;
+	}
+	
+	public void setLocation(String location){
+		this.location =location;
+	}
+
+	public String getWarehouse() {
+		return warehouse;
+	}
+
+	public void setWarehouse(String warehouse) {
+		this.warehouse = warehouse;
+	}
+	
+	
 	
 	
 
