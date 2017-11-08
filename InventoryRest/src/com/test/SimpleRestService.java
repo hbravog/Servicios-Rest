@@ -42,6 +42,17 @@ public class SimpleRestService {
 		ProductData product = new ProductData();
 		return Response.ok(product.GetAllProduct()).build();
 	}
+
+	@GET
+	@Path("/getProductByCode")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getProductByCode(@QueryParam("p1") String item) throws SQLException, ParseException
+	
+	{
+		//String cod = item.replace("\"", "");
+		ProductData product = new ProductData();
+		return Response.ok(product.GetProductByCode(item)).build();
+	}
 	
 	@GET
 	@Path("/getAllCategory")
@@ -86,14 +97,14 @@ public class SimpleRestService {
 	@GET
 	@Path("/AdjustItemQty")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String AdjustItemQty(@QueryParam("p1") String item,@QueryParam("p2") String location,@QueryParam("p3") String warehouse,@QueryParam("p4") String qty )
+	public String AdjustItemQty(@QueryParam("p1") String item,@QueryParam("p3") String warehouse,@QueryParam("p4") String qty )
 	{
 		int response = 0;
 		Product dto = new Product();
 		ProductData data = new ProductData();
 		dto.setCod_produto(item);
 		dto.setQty(Integer.parseInt(qty));
-		dto.setLocation(location);
+		//dto.setLocation(location);
 		dto.setWarehouse(warehouse);
 		response = data.AdjustItemQty(dto);
 		return String.valueOf(response); 

@@ -56,8 +56,9 @@ public class ProductData
 	
 	public int AdjustItemQty(Product product)
 	{
+		int status = 0;
 		MySqlHelper db = new MySqlHelper();
-		String query = "{CALL SP_UPD_PRODUCTQTY(?,?)}";
+		String query = "{CALL SP_UPD_PRODUCTQTY(?,?,?,?,?)}";
 		CallableStatement stmt;
 		try {
 			stmt = (CallableStatement) db.connect().prepareCall(query);
@@ -65,11 +66,33 @@ public class ProductData
 			stmt.setString(2, product.getLocation());
 			stmt.setString(3,product.getWarehouse());
 			stmt.setInt(4,product.getQty());
+			stmt.registerOutParameter(5, Types.INTEGER);
 			stmt.executeUpdate();
+			status =  stmt.getInt(5);
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		return 1;
+		return status;
+	}
+	
+	public List<Product> GetProductByCode(String item) throws SQLException
+	{
+		List<Product> lista = new ArrayList<Product>();
+		Product prod = new Product();
+		MySqlHelper db = new MySqlHelper();
+		String query = "CALL SP_GET_PRODUCT_BY_CODE(?)";
+		CallableStatement stmt = (CallableStatement) db.connect().prepareCall(query);
+		stmt.setString(1, item);
+		ResultSet rs = stmt.executeQuery();
+        while (rs.next()) 
+        {
+        	prod.setCod_produto(rs.getString(1).toString()); 
+			prod.setNombre(rs.getString(2).toString());
+			prod.setProveedor_id(rs.getInt(3));
+			prod.setFecha_creacion(rs.getString(4));
+			lista.add(prod);
+        }
+		return lista;
 	}
 }
