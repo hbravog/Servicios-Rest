@@ -13,11 +13,15 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.dao.inventory.AvailablePhysicalData;
 import com.dao.inventory.CategoryData;
+import com.dao.inventory.LocationData;
 import com.dao.inventory.ProductData;
 import com.dao.inventory.ProviderData;
 import com.dao.inventory.UserData;
+import com.dao.inventory.WareHouseData;
 import com.inventory.dto.Product;
+import com.inventory.dto.Location;
 
 
 @Path("/service")
@@ -97,16 +101,49 @@ public class SimpleRestService {
 	@GET
 	@Path("/AdjustItemQty")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String AdjustItemQty(@QueryParam("p1") String item,@QueryParam("p3") String warehouse,@QueryParam("p4") String qty )
+	public String AdjustItemQty(@QueryParam("p1") String item,@QueryParam("p2") String qty,@QueryParam("p3") String warehouse,@QueryParam("p4") String location )
 	{
 		int response = 0;
 		Product dto = new Product();
-		ProductData data = new ProductData();
+		AvailablePhysicalData data = new AvailablePhysicalData();
 		dto.setCod_produto(item);
 		dto.setQty(Integer.parseInt(qty));
-		//dto.setLocation(location);
+		dto.setLocation(location);
 		dto.setWarehouse(warehouse);
 		response = data.AdjustItemQty(dto);
+		return String.valueOf(response); 
+	}
+	
+	
+	@GET
+	@Path("/getAllLocation")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAllLocation() throws SQLException, ParseException
+	{
+		LocationData data = new LocationData();
+		return Response.ok(data.GetAllLocation()).build();
+	}
+	
+	@GET
+	@Path("/getAllWarehouse")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAllWarehouse() throws SQLException, ParseException
+	{
+		WareHouseData data = new WareHouseData();
+		return Response.ok(data.GetAllWareHouse()).build();
+	}
+	
+	@GET
+	@Path("/AddLocation")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String AddLocation(@QueryParam("p1") String location,@QueryParam("p2") String warehouse)
+	{
+		int response = 0;
+		Location dto = new Location();
+		LocationData data = new LocationData();
+		dto.setLocation(location);
+		dto.setWarehouse(Integer.parseInt(warehouse));
+		response = data.AddLocation(dto);
 		return String.valueOf(response); 
 	}
 }

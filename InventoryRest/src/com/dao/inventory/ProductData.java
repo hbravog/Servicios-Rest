@@ -54,27 +54,7 @@ public class ProductData
 		return status;
 	}
 	
-	public int AdjustItemQty(Product product)
-	{
-		int status = 0;
-		MySqlHelper db = new MySqlHelper();
-		String query = "{CALL SP_UPD_PRODUCTQTY(?,?,?,?,?)}";
-		CallableStatement stmt;
-		try {
-			stmt = (CallableStatement) db.connect().prepareCall(query);
-			stmt.setString(1, product.getCod_produto());
-			stmt.setString(2, product.getLocation());
-			stmt.setString(3,product.getWarehouse());
-			stmt.setInt(4,product.getQty());
-			stmt.registerOutParameter(5, Types.INTEGER);
-			stmt.executeUpdate();
-			status =  stmt.getInt(5);
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		return status;
-	}
+
 	
 	public List<Product> GetProductByCode(String item) throws SQLException
 	{
